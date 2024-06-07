@@ -86,13 +86,12 @@ if __name__ == "__main__":
             className="w-full h-10 mt-4 rounded-tr-xl rounded-tl-xl flex items-center justify-end"
             style={{ backgroundColor: "rgb(68, 68, 68)" }}
           >
-            <div
-              className="mr-3 btn btn-link"
+            <img
+              src={ClipBoard}
+              alt="Clipboard Icon"
+              className="mr-2 w-16 btn btn-link"
               style={{
-                backgroundImage: `url(${ClipBoard})`,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
+                cursor: "pointer",
               }}
               onClick={copyToClipboard}
             />
@@ -113,7 +112,7 @@ if __name__ == "__main__":
           <p className="text-sm text-justify px-3 mt-5">
             {`Use the word as the flag in the format:`}
           </p>
-          <p className="text-sm text-justify px-3 text-teal-500">{`igniteCTF{XXXX}`}</p>
+          <p className="text-sm text-justify px-3 text-teal-500">{`igniteCTF{answer}`}</p>
           <div
             className="mt-5 rounded-lg text-center bg-green-500 text-white"
             onClick={handleHintClick}
@@ -127,7 +126,7 @@ if __name__ == "__main__":
             className={`rounded-lg bg-slate-900 outline-none pl-3  w-full py-1 ${
               isComplete ? "placeholder:text-green-500" : ""
             }`}
-            placeholder={isComplete ? answer : "Answer"}
+            placeholder={isComplete ? answer : "igniteCTF{answer}"}
             style={{ fontSize: "0.9rem" }}
             onChange={(e) => setUserFlag(e.target.value)}
             disabled={isComplete}

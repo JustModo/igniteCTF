@@ -41,6 +41,7 @@ export default function Challenge3() {
   const answer = "igniteCTF{our_tiny_little_secret}";
 
   const { completeChallenge, userData } = useContext(ChallengeContext);
+  const [disclaimer, setDisclaimer] = useState(false);
 
   useEffect(() => {
     if (!userData) return;
@@ -66,6 +67,14 @@ export default function Challenge3() {
     setShowHint(true);
     console.log("Hint viewed, points deducted.");
   };
+
+  function handleDisclaimer() {
+    if (disclaimer) return;
+    setDisclaimer(true);
+    setTimeout(() => {
+      setDisclaimer(false);
+    }, 5000);
+  }
   return (
     <>
       <div className="flex flex-col w-full h-full justify-between">
@@ -78,25 +87,34 @@ export default function Challenge3() {
           </p>
           <img
             ref={imageRef}
-            className="w-full h-auto py-5"
+            className="w-full h-auto pt-5 pb-3"
             src={SOSC}
             alt="Youtube"
           />
+          <p
+            className="text-xs text-slate-300 text-justify btn-ghost"
+            onClick={handleDisclaimer}
+            disabled={disclaimer}
+          >
+            {disclaimer
+              ? "DISCLAIMER: PLEASE DO NOT ZOOM OR TAKE SCREENSHOTS. THERE IS NOTHING HIDDEN WITHIN THE DISPLAYED IMAGE."
+              : "Disclaimer"}
+          </p>
           <button
-            className="outline outline-white mt-5 px-2 rounded-lg text-center w-full btn bg-black text-white"
+            className="outline outline-white mt-8 px-2 rounded-lg text-center w-full btn bg-black text-white"
             onClick={handleDownload}
             disabled={isLoading}
           >
             {isLoading ? (
               <span className="loading loading-dots loading-md" />
             ) : (
-              "Download"
+              "--> Download Image <--"
             )}
           </button>
           <p className="text-sm text-justify px-3 mt-5">
             {`Use the word as the flag in the format:`}
           </p>
-          <p className="text-sm text-justify px-3 text-teal-500">{`igniteCTF{XXXX}`}</p>
+          <p className="text-sm text-justify px-3 text-teal-500">{`igniteCTF{answer}`}</p>
           <div
             className="mt-5 rounded-lg text-center bg-green-500 text-white"
             onClick={handleHintClick}
@@ -110,7 +128,7 @@ export default function Challenge3() {
             className={`rounded-lg bg-slate-900 outline-none pl-3 w-full py-1 ${
               isComplete ? "placeholder:text-green-500" : ""
             }`}
-            placeholder={isComplete ? answer : "Answer"}
+            placeholder={isComplete ? answer : "igniteCTF{answer}"}
             style={{ fontSize: "0.9rem" }}
             onChange={(e) => setUserFlag(e.target.value)}
             disabled={isComplete}

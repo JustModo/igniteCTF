@@ -3,11 +3,11 @@ import React from "react";
 export default function RulesModal({ show, onClose, title }) {
   if (!show) return null;
 
-  const message = `1. You need to submit all the flags in igniteCTF{xxx} format.
-  2. First one to solve all the challenges wins.
-  3. Incase of a tie, the one who has used the least hints, wins.
-  4. Players are encouraged to search the web for suitable tools to solve the problems.
-  5. Most importantly, have fun 😉`;
+  const message = `You need to submit all the flags in igniteCTF{answer} format.
+  First one to solve all the challenges wins.
+  All answers form meaningful words.
+  Players are encouraged to search the web for suitable tools to solve the problems.
+  Most importantly, have fun 😉`;
 
   const messageLines = message.split("\n");
 
@@ -20,9 +20,15 @@ export default function RulesModal({ show, onClose, title }) {
           </h3>
           <div className="mt-2 px-7 py-3">
             {messageLines.map((line, index) => (
-              <p key={index} className="text-sm text-gray-500 text-justify">
-                {line}
-              </p>
+              <div
+                key={index}
+                className="flex flex-row items-start justify-start"
+              >
+                <span className="text-black text-sm px-1">{`${
+                  index + 1
+                }.`}</span>
+                <p className="text-sm text-gray-500 text-left">{line}</p>
+              </div>
             ))}
           </div>
           <div className="items-center px-4 py-3">
